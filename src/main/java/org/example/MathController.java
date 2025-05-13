@@ -28,4 +28,21 @@ public class MathController {
             return Response.ok(a * b).build();
         }
     }
+
+    @POST
+    @Path("/add")
+    @Operation(summary = "计算整数之和接口")
+    @APIResponse(responseCode = "200",
+            content = @Content(mediaType = MediaType.TEXT_PLAIN,
+                    schema = @Schema(implementation = Integer.class)
+            )
+    )
+    public Response add(@FormParam("a") Integer a, @FormParam("b") Integer b) {
+        if (a == null || b == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } else {
+            return Response.ok(a + b).build();
+        }
+    }
+
 }
